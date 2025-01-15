@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Just For You</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://files.dariku.my.id/dko103/s.css" />
+  </head>
+  <body>
+    <div class="ctnr">
+      <div class="lv">
+        <img src="https://dekatutorial.github.io/crd/lv.svg" />
+        <p>Klik Love-nya</p>
+      </div>
+      <div class="ctn">
+        <button class="btn next">[ Lanjut ]</button>
+        <button class="btn send">[ Kirim Pesan ]</button>
+      </div>
+    </div>
+    <script src="https://files.dariku.my.id/dko103/s.js"></script>
+    <script>
+      // Tambahkan ucapan sesuai contoh
+      konten = [
+        {
+          gambar: "Gambar",
+          ucapan: "Ucapan",
+        },
+        {
+          gambar: "Gambar",
+          ucapan: "Ucapan",
+        },
+        {
+          gambar: "Gambar",
+          ucapan: "Ucapan",
+        },
+      ];
 
+      // Masukan nama file musik didalam kutip
+      musik = "";
+
+      // Masukan nomor whatsapp diawali 62 (Opsional)
+      nomorWhatsapp = "";
+
+      watermark = "Made by Owner";
+
+      async function kirimPesan() {
+        var { value: mypesan } = await swalo.fire({ title: "Tulis pesan disini ^_^", input: "textarea", confirmButtonText: "Kirim" });
+        if (mypesan) {
+          await swalo.fire("Kirim pesan ke wa aku ya");
+          if (nomorWhatsapp.startsWith("62")) {
+            location.assign(`https://wa.me/${nomorWhatsapp}?text=${mypesan}`);
+          } else {
+            location.assign("https://wa.me/" + "?text=" + mypesan);
+          }
+        } else {
+          await swalo.fire({ confirmButtonText: "Iya deh", title: "Jangan dikosongin dong :)" });
+          kirimPesan();
+        }
+      }
+
+      DekaTutorial(konten, musik, nomorWhatsapp, kirimPesan, watermark);
+    </script>
+  </body>
+</html>
